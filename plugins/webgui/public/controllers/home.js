@@ -43,16 +43,16 @@ app
     ($scope, $state) => {
       $scope.icons = [{
         icon: 'flash_on',
-        title: '快速搭建',
-        content: '仅依赖Node.js，无需安装数据库（可选MySQL）',
+        title: '极速体验',
+        content: '正常连接可以达到1Mb/s的速度，根据不同区域会有差异。',
       }, {
         icon: 'build',
-        title: '易于配置',
-        content: '带有插件系统，仅需修改配置文件即可运行',
+        title: '简单易用',
+        content: '注册即可获取连接账号，更多信息登录查看公告。',
       }, {
         icon: 'vpn_key',
-        title: '官方标准',
-        content: '支持libev和python版本的标准manager API',
+        title: '免费试用',
+        content: '新注册账号可以免费试用一天，试用账号可用1G流量。'
       }];
       $scope.login = () => { $state.go('home.login'); };
       $scope.signup = () => { $state.go('home.signup'); };

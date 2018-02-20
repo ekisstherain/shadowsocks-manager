@@ -24,7 +24,12 @@ const manifest = {
       src: '/favicon.png',
       type: 'image/png',
       sizes: '256x256'
-    }
+    },
+	  {
+		  src: '/favicon.png',
+		  type: 'image/png',
+		  sizes: '256x256'
+	  }
   ],
   start_url: '/',
   display: 'standalone',
