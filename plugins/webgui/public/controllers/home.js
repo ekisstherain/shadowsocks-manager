@@ -44,7 +44,7 @@ app
       $scope.icons = [{
         icon: 'flash_on',
         title: '极速体验',
-        content: '正常连接可以达到1Mb/s的速度，根据不同区域会有差异。',
+        content: '使用GOOGLE BBR算法提高带宽使用率。',
       }, {
         icon: 'build',
         title: '简单易用',
@@ -52,7 +52,7 @@ app
       }, {
         icon: 'vpn_key',
         title: '免费试用',
-        content: '新注册账号可以免费试用一天，试用账号可用1G流量。'
+        content: '新用户可以免费获得试用体验账号。'
       }];
       $scope.login = () => { $state.go('home.login'); };
       $scope.signup = () => { $state.go('home.signup'); };
