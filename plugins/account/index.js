@@ -320,7 +320,7 @@ const setAccountLimit = async (userId, accountId, orderType) => {
     return;
   }
   const accountData = JSON.parse(account.data);
-  accountData.flow = flow[orderType];
+  accountData.flow += flow[orderType];
   const timePeriod = {
     '2': 7 * 86400 * 1000,
     '3': 30 * 86400 * 1000,
