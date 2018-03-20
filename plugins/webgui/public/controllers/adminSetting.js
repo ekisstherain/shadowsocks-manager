@@ -31,23 +31,11 @@ app.controller('AdminSettingsController', ['$scope', '$http', '$timeout', '$stat
     $scope.setTitle('支付设置');
     $scope.setMenuButton('arrow_back', 'admin.settings');
     $scope.time = [{
-      id: 'hour',
-      name: '小时',
-    }, {
-      id: 'day',
-      name: '天',
-    }, {
-      id: 'week',
-      name: '周',
-    }, {
       id: 'month',
-      name: '月',
-    }, {
-      id: 'season',
-      name: '季',
+      name: '月'
     }, {
       id: 'year',
-      name: '年',
+      name: '年'
     }];
     let lastSave = 0;
     let lastSavePromise = null;
@@ -312,23 +300,11 @@ app.controller('AdminSettingsController', ['$scope', '$http', '$timeout', '$stat
     $scope.setTitle('支付设置');
     $scope.setMenuButton('arrow_back', 'admin.settings');
     $scope.time = [{
-      id: 'hour',
-      name: '小时',
-    }, {
-      id: 'day',
-      name: '天',
-    }, {
-      id: 'week',
-      name: '周',
-    }, {
       id: 'month',
-      name: '月',
-    }, {
-      id: 'season',
-      name: '季',
+      name: '月'
     }, {
       id: 'year',
-      name: '年',
+      name: '年'
     }];
     $scope.editPayment = id => {
       $state.go('admin.editPayment', { paymentType: id });
