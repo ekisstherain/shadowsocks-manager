@@ -263,8 +263,8 @@ exports.getPrice = (req, res) => {
     return success[0].value;
   }).then(success => {
     for(const s in success) {
-      price.alipay[s] = success[s].alipay;
-      price.paypal[s] = success[s].paypal;
+      price.alipay[s] = success[s];
+      price.paypal[s] = success[s];
     }
     return res.send(price);
   }).catch(() => {
