@@ -183,6 +183,11 @@ app.controller('AdminUserController', ['$scope', '$state', '$stateParams', 'admi
     $scope.sendEmail = () => {
       emailDialog.show(userId);
     };
+
+    $scope.editUser = () => {
+	  $state.go('admin.editUser', { userId: userId });
+    };
+
   }
 ])
 .controller('AdminAddUserController', ['$scope', '$state', '$stateParams', '$http', 'alertDialog',
@@ -208,4 +213,44 @@ app.controller('AdminUserController', ['$scope', '$state', '$stateParams', 'admi
       $state.go('admin.user');
     };
   }
+])
+.controller('AdminEditUserController', ['$scope', '$state', 'adminApi', '$stateParams', '$http', 'alertDialog',
+	($scope, $state, adminApi, $stateParams, $http, alertDialog) => {
+	  $scope.setTitle('编辑用户');
+      $scope.setMenuButton('arrow_back', 'admin.user');
+
+      const userId = $stateParams.userId;
+      const getUserData = () => {
+          adminApi.getUserData(userId).then(success => {
+              $scope.user = {
+                id: success.user.id,
+                username: success.user.username,
+	            nickName: success.user.nickName,
+                remark: success.user.remark
+              };
+          }).catch(err => {
+                  $state.go('admin.user');
+          });
+      };
+      getUserData();
+
+      $scope.confirm = () => {
+          alertDialog.loading();
+          $http.post(`/api/admin/user/edit`, {
+	          username: $scope.user.username,
+              nickName: $scope.user.nickName,
+              remark: $scope.user.remark
+          }).then(success => {
+              alertDialog.show('修改用户成功', '确定');
+          $state.go('admin.userPage', { userId: $scope.user.id });
+
+        }).catch(() => {
+                alertDialog.show('修改用户失败', '确定');
+        });
+      };
+
+      $scope.cancel = () => {
+			$state.go('admin.userPage', { userId: $scope.user.id });
+      };
+}
 ]);

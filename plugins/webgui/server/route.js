@@ -78,6 +78,7 @@ app.get('/api/admin/flow/:serverId(\\d+)/:accountId(\\d+)/lastConnect', isAdmin,
 
 app.get('/api/admin/user', isAdmin, adminUser.getUsers);
 app.post('/api/admin/user/add', isAdmin, adminUser.addUser);
+app.post('/api/admin/user/edit', isAdmin, adminUser.editUser);
 app.get('/api/admin/user/recentSignUp', isAdmin, admin.getRecentSignUpUsers);
 app.get('/api/admin/user/recentLogin', isAdmin, admin.getRecentLoginUsers);
 

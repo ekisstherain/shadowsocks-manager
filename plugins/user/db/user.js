@@ -17,6 +17,8 @@ const createTable = async() => {
     table.bigInteger('lastLogin');
     table.string('resetPasswordId');
     table.bigInteger('resetPasswordTime');
+    table.string('nickName');
+    table.string('remark');
   });
 };
 

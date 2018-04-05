@@ -99,12 +99,13 @@ const checkPassword = async (username, password) => {
 const editUser = async (userInfo, edit) => {
   try {
     const username = (await knex('user').select().where(userInfo))[0].username;
-    if(!username) {
-      throw new Error('user not found');
-    }
-    if(edit.password) {
-      edit.password = createPassword(edit.password, username);
-    }
+	  if (!username) {
+		  throw new Error('user not found');
+	  }
+	  if (edit.password) {
+		  edit.password = createPassword(edit.password, username);
+	  }
+	  edit.lastUpdated = Date.now();
     const user = await knex('user').update(edit).where(userInfo);
     return;
   } catch(err) {
@@ -167,6 +168,9 @@ const getUserAndPaging = async (opt = {}) => {
     'user.resetPasswordId as resetPasswordId',
     'user.resetPasswordTime as resetPasswordTime',
     'account_plugin.port as port',
+	  'user.nickName as nickName',
+	  'user.remark as remark',
+	  'user.lastUpdated as lastUpdated',
   ]).leftJoin('account_plugin', 'user.id', 'account_plugin.userId')
   .where({ 'user.type': 'normal' }).groupBy('user.id');
 

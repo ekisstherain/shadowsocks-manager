@@ -3,7 +3,8 @@
         <md-card>
             <md-card-header>
                 <md-card-header-text style="word-break: keep-all; white-space:nowrap; overflow: hidden; text-overflow:ellipsis;">
-                    <span class="md-headline">{{user.username}}</span>
+                    <span class="md-headline">{{user.username}} ({{user.nickName}})</span>
+                    <pre class="md-subhead">{{user.remark}}</pre>
                 </md-card-header-text>
             </md-card-header>
             <md-card-content>
@@ -26,11 +27,21 @@
                           </div>
                       </div>
                   </md-list-item>
+                  <md-list-item>
+                      <div flex layout="row" layout-align="space-between center">
+                          <div flex="30">最后修改</div>
+                          <div flex="70" style="text-align: right;" ng-if="user.lastLogin">
+                              <span style="font-size: 0.9em;">{{ user.lastUpdated | date : 'yyyy-MM-dd HH:mm:ss' }}</span><br><span
+                                  style="font-size: 0.9em;">{{ user.lastUpdated | timeagoshort }}</span>
+                          </div>
+                      </div>
+                  </md-list-item>
                   <md-divider></md-divider>
               </md-list>
             <div flex layout="row">
                 <md-button class="md-primary" ng-click="sendEmail()">发送邮件</md-button>
                 <md-button class="md-warn" ng-click="deleteUser()">删除用户</md-button>
+                <md-button class="md-warn" ng-click="editUser()">修改用户</md-button>
             </div>
             </md-card-content>
         </md-card>

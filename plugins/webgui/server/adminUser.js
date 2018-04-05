@@ -12,13 +12,16 @@ exports.getUsers = (req, res) => {
     sort,
   }).then(success => {
     success.users = success.users.map(m => {
-      return {
-        id: m.id,
-        email: m.email,
-        lastLogin: m.lastLogin,
-        username: m.username,
-        port: m.port,
-      };
+	  return {
+		  id: m.id,
+		  email: m.email,
+		  lastLogin: m.lastLogin,
+		  username: m.username,
+		  port: m.port,
+		  nickName: m.nickName,
+		  remark: m.remark,
+		  lastUpdated: m.lastUpdated
+	  };
     });
     return res.send(success);
   }).catch(err => {
@@ -48,4 +51,17 @@ exports.addUser = (req, res) => {
     console.log(err);
     res.status(403).end();
   });
+};
+
+exports.editUser = (req, res) => {
+	const username = req.body.username;
+	user.edit({username: username}, {
+		nickName: req.body.nickName,
+		remark: req.body.remark
+	}).then(success => {
+		res.send('success');
+	}).catch(err => {
+			console.log(err);
+		res.status(403).end();
+	});
 };

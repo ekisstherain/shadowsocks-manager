@@ -18,6 +18,11 @@ app.config(['$stateProvider', $stateProvider => {
       url: '/addUser',
       controller: 'AdminAddUserController',
       templateUrl: `${ cdn }/public/views/admin/addUser.html`,
-    });
+    })
+	.state('admin.editUser', {
+		url: '/editUser/:userId',
+		controller: 'AdminEditUserController',
+		templateUrl: `${ cdn }/public/views/admin/editUser.html`,
+	});
   }])
 ;
