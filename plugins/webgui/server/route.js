@@ -174,6 +174,28 @@ app.get('/favicon.png', (req, res) => {
   res.sendFile(file, options);
 });
 
+app.get('/bg.jpg', (req, res) => {
+	let file = './libs/bg.jpg';
+let options = {
+	root: './plugins/webgui/'
+};
+const iconPath = config.plugins.webgui.icon;
+if(iconPath) {
+	const ssmgrPath = path.resolve(os.homedir(), './.ssmgr/');
+	if (iconPath[0] === '/' || iconPath[0] === '.') {
+		options = {};
+		file = path.resolve(iconPath);
+	} else if (iconPath[0] === '~') {
+		file = '.' + iconPath.substr(1);
+		options.root = os.homedir();
+	} else {
+		file = iconPath;
+		options.root = ssmgrPath;
+	}
+}
+res.sendFile(file, options);
+});
+
 app.get('/shadowsocks.png', (req, res) => {
 	let file = './libs/shadowsocks.png';
 let options = {

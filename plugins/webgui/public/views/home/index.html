@@ -1,10 +1,43 @@
-<div layout="column" layout-align="center center">
-    <div layout="column" layout-align="center center" style="width: 100%;">
-        <img src="/favicon.png" style="margin-top: 5vw; width: 300px;"></img>
-    </div>
-    <div layout="row" layout-xs="column" style="width: 100%;">
+<style>
+
+    .overlay {
+        background: rgba(0, 0, 0, .5);
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    #wrap {
+        width: 100%;
+        height: 100%;
+        display: table;
+        position: relative;
+        z-index: 1;
+    }
+
+    .slogan {
+        width: 100%;
+        position: absolute;
+        bottom: 50px;
+    }
+</style>
+<div class="overlay"></div>
+<div layout="column" layout-align="center center" style="color: #efefef; height: 100%; background:url('/bg.jpg') top
+center no-repeat #000;">
+    <div id="wrap">
         <div layout="column" layout-align="center center" style="width: 100%;">
-            <h1>今天起，重新认识这个世界^v^</h1>
+            <img src="/favicon.png" style="width: 250px; margin-top: 50px;"/>
+        </div>
+        <div class="slogan" layout="row" layout-xs="column">
+            <div layout="column" layout-align="center center" style="width: 100%;">
+                <h1>从此出发^v^畅游世界</h1>
+            </div>
         </div>
     </div>
 </div>
