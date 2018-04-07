@@ -70,6 +70,8 @@ const getAccount = async (options = {}) => {
     'account_plugin.autoRemove',
     'user.id as userId',
     'user.email as user',
+		'user.nickName as nickName',
+		'user.remark as remark',
   ])
   .leftJoin('user', 'user.id', 'account_plugin.userId')
   .where(where);

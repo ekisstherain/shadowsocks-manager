@@ -5,6 +5,8 @@
                 <md-card-header-text>
                     <span class="md-title">{{account.port}}</span>
                     <span class="md-subhead" ng-click="toUserPage(account.userId)">{{account.user}}</span>
+                    <span class="md-subhead" ng-click="toUserPage(account.userId)">{{account.nickName}}</span>
+                    <span class="md-subhead" ng-click="toUserPage(account.userId)">{{account.remark}}</span>
                 </md-card-header-text>
                 <div>
                     <md-button class="md-primary" aria-label="edit" ng-click="editAccount(account.id)">

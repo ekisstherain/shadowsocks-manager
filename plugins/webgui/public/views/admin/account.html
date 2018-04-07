@@ -5,9 +5,14 @@
             <md-card-content>
                 <div layout="row" layout-align="space-between center" style="word-break: keep-all; white-space:nowrap; overflow: hidden; text-overflow:ellipsis;">
                     <div ng-click="toAccount(a.id)" flex="30">{{a.port}}</div>
-
-                    <div flex="70" style="text-align:right; color: #aaa; font-size: 0.8em;">{{a.user || a.password}}</div>
+                    <div flex="70" style="text-align:right; color: #aaa; font-size: 0.8em;">
+                        {{a.user || a.password}}
+                    </div>
                 </div>
+                <br>
+                <span style="font-size: 0.7em;">{{a.nickName}}</span>
+                <br>
+                <span style="font-size: 0.7em;">{{a.remark}}</span>
             </md-card-content>
         </md-card>
     </div>
