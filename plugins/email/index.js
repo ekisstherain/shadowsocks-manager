@@ -6,6 +6,10 @@ const rp = require('request-promise');
 const config = appRequire('services/config').all();
 const knex = appRequire('init/knex').knex;
 const isInBlackList = appRequire('plugins/email/blackList').isInBlackList;
+const cron = require('cron');
+const account = appRequire('plugins/account');
+const user = appRequire('plugins/user/index');
+const moment = require('moment');
 
 let emailConfig;
 let transporter;
@@ -161,3 +165,91 @@ const checkCode = async (email, code) => {
 exports.checkCode = checkCode;
 exports.sendCode = sendCode;
 exports.sendMail = sendMail;
+
+
+console.info("init send email");
+logger.info("init send email 222222");
+var CronJob = cron.CronJob;
+new CronJob('1 1 1 * * *', function() {
+	console.log('You will see this message every second');
+
+	const timePeriod = {
+		'2': 7 * 86400 * 1000,
+		'3': 30 * 86400 * 1000,
+		'4': 1 * 86400 * 1000,
+		'5': 3600 * 1000
+	};
+
+	const oneDay = 86400 * 1000;
+	const oneDateLater = Date.now() + oneDay;
+	const twoDateLater = oneDateLater + oneDay;
+
+	account.getAccount().then(accounts => {
+
+	  for(let account of accounts) {
+		const accountData = JSON.parse(account.data);
+		console.info("getAccount call");
+
+		console.info(accountData.create + accountData.limit * timePeriod[account.type]);
+		console.info( Date.now());
+		const expiryDate = accountData.create + accountData.limit * timePeriod[account.type];
+
+		if (expiryDate >= oneDateLater && expiryDate <= twoDateLater) {
+			console.info('send to me：' + account.port);
+			if (account.userId) {
+				user.getOne(account.userId).then(u => {
+				   if(u.email) {
+				      const title = `[SS] User[${u.nickName}] account[${account.port}] will expiry on  ${moment(new Date(expiryDate)).format('YYYY-MM-DD')}`;
+					  sendMail('498482873@qq.com', title, title);
+                   }
+			  });
+            }
+
+		} else if (expiryDate >= Date.now() && expiryDate <= oneDateLater) {
+			console.info('send to client：' + account.port);
+			if (account.userId) {
+				user.getOne(account.userId).then(u => {
+					if(u.email) {
+                      const title = `温馨提示: 您的Shadowsocks账号将在[${moment(new Date(expiryDate)).format('YYYY-MM-DD')}]过期`;
+                      const content = `您好，
+
+    你的Shadowsocks账号的服务器将在[${moment(new Date(expiryDate)).format('YYYY-MM-DD')}]后到期。
+    感谢你的支持和使用。
+    
+    如果你需要继续使用，我们提供付费优惠套餐：
+    付费套餐一：月付10￥ - 30G。
+    付费套餐二：年付149￥ - 512G。
+    
+    如何续费？
+    登录你的账号
+    选择账号页面，下方有续费功能按钮。
+    点击后选择想用的套餐，会生成支付宝的支付码。
+    使用支付宝扫描支付就可以了。
+    暂时不支持微信支付哦。
+    
+    温馨提示：
+    过期前续费流量不清零!
+    过期前续费流量不清零!
+    过期前续费流量不清零!
+    重要的事情说三遍^v^
+    
+    更多需求和意见反馈请联系：
+    QQ: 498482873
+    微信:13570405349
+    
+    网站链接：https://climb-ladder.site/
+    
+    谢谢支持！！！！！
+    `;
+
+                      sendMail(u.email, title, content);
+				    }
+			  });
+			}
+		}
+
+      }
+
+    });
+}, null, true, 'Asia/Shanghai');
+
