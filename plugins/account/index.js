@@ -322,7 +322,11 @@ const setAccountLimit = async (userId, accountId, orderType) => {
     return;
   }
   const accountData = JSON.parse(account.data);
-  accountData.flow += flow[orderType];
+  // 大于当前的流量不在累加， 小于的累加
+  if (accountData.flow < flow[orderType]) {
+	  accountData.flow += flow[orderType];
+  }
+
   const timePeriod = {
     '2': 7 * 86400 * 1000,
     '3': 30 * 86400 * 1000,
