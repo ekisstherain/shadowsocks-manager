@@ -96,9 +96,10 @@ app
       };
     }
   ])
-  .controller('HomeSignupController', ['$scope', '$state', '$interval', '$timeout', 'homeApi', 'alertDialog', '$localStorage',
-    ($scope, $state, $interval, $timeout, homeApi, alertDialog, $localStorage) => {
+  .controller('HomeSignupController', ['$scope', '$state', '$interval', '$timeout', 'homeApi', 'alertDialog', '$localStorage', '$stateParams',
+    ($scope, $state, $interval, $timeout, homeApi, alertDialog, $localStorage, $stateParams) => {
       $scope.user = {};
+      $scope.referralId = $stateParams.referralId;
       $scope.sendCodeTime = 0;
       $scope.sendCode = () => {
         alertDialog.loading().then(() => {
@@ -121,7 +122,7 @@ app
       };
       $scope.signup = () => {
         alertDialog.loading().then(() => {
-          return homeApi.userSignup($scope.user.email, $scope.user.code, $scope.user.password);
+          return homeApi.userSignup($scope.user.email, $scope.user.code, $scope.user.password, $scope.referralId);
         })
         .then(userType => {
           $localStorage.home.status = userType;

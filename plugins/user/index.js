@@ -49,6 +49,9 @@ const addUser = async (options) => {
         password: createPassword(options.password, options.username)
       });
     }
+	  Object.assign(insert, {
+		  referralId: options.referralId
+	  });
     return knex('user').insert(insert);
   } catch(err) {
     console.log(err);

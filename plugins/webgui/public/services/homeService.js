@@ -1,11 +1,13 @@
 const app = angular.module('app');
 
 app.factory('homeApi', ['$http', $http => {
-  const userSignup = (email, code, password) => {
+  const userSignup = (email, code, password, referralId) => {
+    console.info('333333333', referralId);
     return $http.post('/api/home/signup', {
       email,
       code,
       password,
+        referralId
     })
     .then(success => success.data)
     .catch(err => {

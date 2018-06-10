@@ -49,6 +49,7 @@ exports.signup = (req, res) => {
       email,
       password,
       type,
+      referralId: req.body.referralId
     });
   }).then(success => {
     req.session.user = success[0];
@@ -215,6 +216,9 @@ exports.sendCode = (req, res) => {
     const email = req.body.email.toString().toLowerCase();
     const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
     const session = req.sessionID;
+    console.info(success.content );
+    console.info(ip);
+	console.info(session);
     return emailPlugin.sendCode(email, success.title || 'ss验证码', success.content || '欢迎新用户注册，\n您的验证码是：', {
       ip,
       session,

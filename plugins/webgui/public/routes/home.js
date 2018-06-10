@@ -29,6 +29,11 @@ app.config(['$stateProvider', $stateProvider => {
       controller: 'HomeTelegramLoginController',
       templateUrl: `${ cdn }/public/views/home/telegramLogin.html`,
     })
+	.state('home.referral', {
+		url: '/signup/:referralId',
+		controller: 'HomeSignupController',
+		templateUrl: `${ cdn }/public/views/home/signup.html`,
+	})
     .state('home.signup', {
       url: '/signup',
       controller: 'HomeSignupController',
